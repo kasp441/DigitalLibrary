@@ -9,5 +9,14 @@ services:
     volumes:
       - mssql-data:/var/opt/mssql
 
+  library-api:
+    build: 
+      context: .
+      dockerfile: DigitalLibrary\Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - Library-db        
+
 volumes:
   mssql-data:
