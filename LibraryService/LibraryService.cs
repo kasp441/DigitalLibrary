@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repo
+namespace Service
 {
-    public interface ILibraryRepo
+    public class LibraryService : ILibraryService
     {
     }
 }
