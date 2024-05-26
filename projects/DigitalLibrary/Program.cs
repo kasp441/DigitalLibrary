@@ -14,9 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ILibraryRepo, LibraryRepo>();
 builder.Services.AddScoped<ILibraryService, LibraryService>();
 
-builder.Services.AddDbContext<LibraryContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddDbContext<LibraryContext>();
 
 var app = builder.Build();
 
