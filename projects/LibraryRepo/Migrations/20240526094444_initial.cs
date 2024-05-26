@@ -37,7 +37,7 @@ namespace Repo.Migrations
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
-                {
+                { 
                     table.PrimaryKey("PK_Loans", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Loans_Users_UserId",
