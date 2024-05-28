@@ -1,0 +1,27 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: development 
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '8.0.x'
+      env:
+        DATABASE_CONNECTION_STRING: ${{ env.DATABASE_CONNECTION_STRING }}
+
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+
+    - name: Test with dotnet
+      run: dotnet test --configuration Release
