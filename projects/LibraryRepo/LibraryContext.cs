@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Repo
 {
@@ -8,15 +9,9 @@ namespace Repo
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Loans> Loans { get; set; }
-        public LibraryContext()
+
+        public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
         {
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=Library-db;Database=development;User Id=sa;Password=SuperSecret7!;Trusted_Connection=False;TrustServerCertificate=True;");
-        }
-
-
     }
 }

@@ -12,8 +12,8 @@ using Repo;
 namespace Repo.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20240526094444_initial")]
-    partial class initial
+    [Migration("20240528205641_roottry")]
+    partial class roottry
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,6 +1,7 @@
 
 using Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Repo;
 using Service;
 
@@ -11,10 +12,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Check if the environment variable is specified and use it if available
+var envConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
+if (!string.IsNullOrWhiteSpace(envConnectionString))
+{
+    connectionString = envConnectionString;
+}
+
+// Register DbContextFactory
+builder.Services.AddDbContext<LibraryContext>(options =>
+{
+    options.UseSqlServer(connectionString);
+});
+
 builder.Services.AddScoped<ILibraryRepo, LibraryRepo>();
 builder.Services.AddScoped<ILibraryService, LibraryService>();
 
-builder.Services.AddDbContext<LibraryContext>();
+
 
 var app = builder.Build();
 
