@@ -21,6 +21,8 @@ if (!string.IsNullOrWhiteSpace(envConnectionString))
     connectionString = envConnectionString;
 }
 
+Console.WriteLine($"Using connection string: {connectionString}");
+
 // Register DbContextFactory
 builder.Services.AddDbContext<LibraryContext>(options =>
 {

@@ -34,6 +34,9 @@ jobs:
       run: | 
         dotnet tool install --global dotnet-ef
         dotnet tool restore 
+        
+    - name: Print environment variable
+      run: echo "DATABASE_CONNECTION_STRING: $DATABASE_CONNECTION_STRING"    
 
     - name: Apply Migrations
       run: |
