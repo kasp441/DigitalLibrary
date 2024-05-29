@@ -24,9 +24,9 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Install EF tools
-      run: 
-      dotnet tool install --global dotnet-ef
-      dotnet tool restore 
+      run: | 
+        dotnet tool install --global dotnet-ef
+        dotnet tool restore 
 
     - name: Apply Migrations
       run: |
