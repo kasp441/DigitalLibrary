@@ -29,7 +29,7 @@ jobs:
     - name: Apply Migrations
       run: |
         LAST_GOOD_MIGRATION=$(dotnet ef migrations list | tail -2 | head -1)
-        dotnet ef database update || dotnet ef database update $LAST_GOOD_MIGRATION
+        dotnet ef database update -s projects/digitallibrary -p projects/libraryrepo || dotnet ef database update -s projects/digitallibrary -p projects/libraryrepo $LAST_GOOD_MIGRATION
 
     - name: Test with dotnet
       run: dotnet test --configuration Release
