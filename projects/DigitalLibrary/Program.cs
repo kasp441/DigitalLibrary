@@ -1,5 +1,6 @@
 
 using Domain;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Repo;
@@ -29,8 +30,8 @@ builder.Services.AddDbContext<LibraryContext>(options =>
 
 builder.Services.AddScoped<ILibraryRepo, LibraryRepo>();
 builder.Services.AddScoped<ILibraryService, LibraryService>();
-
-
+builder.Services.AddScoped<IReservationRepo, ReservationRepo>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
 
 var app = builder.Build();
 
@@ -46,6 +47,7 @@ app.UseHttpsRedirection();
 var userGroup = app.MapGroup("/User");
 var bookGroup = app.MapGroup("/Book");
 var loanGroup = app.MapGroup("/Loan");
+var reservationGroup = app.MapGroup("/Reservation");
 
 userGroup.MapPost("/AddUser", async (ILibraryService service, User user) =>
 {
@@ -105,6 +107,21 @@ loanGroup.MapGet("/GetLoans", async (ILibraryService service, int userID) =>
 loanGroup.MapDelete("/ReturnAllBooks", async (ILibraryService service, int loanID) =>
 {
     await service.ReturnAllBooks(loanID);
+});
+
+reservationGroup.MapPost("/AddReservation", async (IReservationService service, Reservation reservation) =>
+{
+    return service.AddReservation(reservation);
+});
+
+reservationGroup.MapGet("/GetReservationsForUsers", async (IReservationService service, int userID) =>
+{
+    return service.GetReservationsForUsers(userID);
+});
+
+reservationGroup.MapGet("/GetReservationsForBooks", async (IReservationService service, int bookID) =>
+{
+    return service.GetReservationsForBooks(bookID);
 });
 
 app.Run();
