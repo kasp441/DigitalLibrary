@@ -79,35 +79,6 @@ namespace Repo.Migrations
                     b.ToTable("Loans");
                 });
 
-            modelBuilder.Entity("Domain.Reservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reservations");
-                });
-
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -149,26 +120,6 @@ namespace Repo.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Reservation", b =>
-                {
-                    b.HasOne("Domain.Book", null)
-                        .WithMany("Reservations")
-                        .HasForeignKey("BookId");
-
-                    b.HasOne("Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Book", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("Domain.Loans", b =>

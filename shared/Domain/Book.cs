@@ -13,6 +13,5 @@ namespace Domain
         public string Author { get; set; }
         public string Genre { get; set; }
         public int Year { get; set; }
-        public List<Reservation> Reservations { get; set; }
     }
 }
