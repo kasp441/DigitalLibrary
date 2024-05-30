@@ -1,6 +1,3 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: deployment CI/CD
 
 on:
@@ -11,34 +8,36 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    environment: depl
+    environment: deployment
+    env:
+      DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }}
 
     steps:
     - uses: actions/checkout@v4
-    
+
+    - name: Print environment variable
+      run: echo "DATABASE_CONNECTION_STRING $DATABASE_CONNECTION_STRING"
+
     - name: Setup .NET 8
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: '8.0.x'
-      env:
-        DATABASE_CONNECTION_STRING: ${{ secrets.DATABASE_CONNECTION_STRING }} 
-        
+
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
 
     - name: Install EF tools
-      run: | 
+      run: |
         dotnet tool install --global dotnet-ef
-        dotnet tool restore 
+        dotnet tool restore
 
     - name: Apply Migrations
       run: |
         LAST_GOOD_MIGRATION=$(dotnet ef migrations list -s projects/DigitalLibrary -p projects/LibraryRepo | tail -2 | head -1)
         dotnet ef database update -s projects/DigitalLibrary -p projects/LibraryRepo || dotnet ef database update $LAST_GOOD_MIGRATION -s projects/DigitalLibrary -p projects/LibraryRepo
-        
+
     - name: Test
       run: dotnet test --no-build --verbosity normal
