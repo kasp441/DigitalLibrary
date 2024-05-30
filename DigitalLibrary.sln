@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "projects\Library
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "shared\Domain\Domain.csproj", "{24FC15B0-0AC1-46BF-B135-917572AF1106}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthScanner", "HealthScanner\HealthScanner.csproj", "{95601EE3-85A8-40FB-821B-A545B5C0AEB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +35,15 @@ Global
 		{24FC15B0-0AC1-46BF-B135-917572AF1106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24FC15B0-0AC1-46BF-B135-917572AF1106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24FC15B0-0AC1-46BF-B135-917572AF1106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95601EE3-85A8-40FB-821B-A545B5C0AEB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95601EE3-85A8-40FB-821B-A545B5C0AEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95601EE3-85A8-40FB-821B-A545B5C0AEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95601EE3-85A8-40FB-821B-A545B5C0AEB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49D7B3D4-932A-454E-8FC5-3DAFD61FFF4B}
 	EndGlobalSection
 EndGlobal
